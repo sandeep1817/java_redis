@@ -23,9 +23,11 @@ public class RedisConnection {
             "As value for key {} already exists not updating, value existing is {} ",
             key,
             jedis.get(key));
+        jedis.expire(key, 5);
         return;
       } else {
         jedis.set(key, value);
+        jedis.expire(key, 5);
         log.info("successfully updated value for key {}", key);
       }
 
